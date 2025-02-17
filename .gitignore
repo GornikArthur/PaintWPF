@@ -1,0 +1,43 @@
+# Игнорируем папки сборки
+bin/
+obj/
+
+# Файлы пользователя и конфигурации Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Кэш и временные файлы
+*.cache
+*.log
+*.pdb
+
+# Файлы пакетов NuGet
+*.nupkg
+packages/
+project.lock.json
+package-lock.json
+
+# Игнорируем файлы деплоя
+*.publish/
+*.deploy/
+*.exe
+*.dll
+*.pdb
+
+# Игнорируем временные файлы системы
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Файлы JetBrains Rider
+.idea/
+*.iml
+
+# Файлы для MacOS
+.DS_Store
+
+# Файлы для Linux
+*.swp
