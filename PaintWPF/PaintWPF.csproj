@@ -8,4 +8,30 @@
     <UseWPF>true</UseWPF>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Remove="BrokenLine.png" />
+    <None Remove="Ellipse.png" />
+    <None Remove="fill.png" />
+    <None Remove="Line.png" />
+    <None Remove="Polygon.png" />
+    <None Remove="Rectangle.png" />
+    <None Remove="redo.png" />
+    <None Remove="undo.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Extended.Wpf.Toolkit" Version="4.7.25103.5738" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="BrokenLine.png" />
+    <Resource Include="Ellipse.png" />
+    <Resource Include="fill.png" />
+    <Resource Include="Line.png" />
+    <Resource Include="Polygon.png" />
+    <Resource Include="Rectangle.png" />
+    <Resource Include="redo.png" />
+    <Resource Include="undo.png" />
+  </ItemGroup>
+
 </Project>
