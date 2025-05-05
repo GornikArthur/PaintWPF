@@ -8,11 +8,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using MyFigureLibrary;
 
 namespace PaintWPF
 {
 	public class MyPolygon : MyFigure
 	{
+		public override string Name => "FPolygon";
 		public List<MyLine> arr_lines { get; set; } = new List<MyLine>();
 		public int last_line { get; set; } = 0;
 		public List<Point> Points { get; set; } = new List<Point>();
@@ -141,6 +143,14 @@ namespace PaintWPF
 				my_polygon.GetLineByIndex(my_polygon.last_line).Calc(pos);
 			}
 		}
+		public override void CustomMouseMove(Point currentPoint)
+		{
+			if (my_polygon != null && my_polygon.GetLineByIndex(last_line) != null)
+			{
+				my_polygon.GetLineByIndex(0).Calc(currentPoint);
+			}
+		}
+
 		public static MyLine CreatePolygonLine(Point pos, Color color, int thickness, Canvas Paint_canvas, List<MyFigure> arr_figures)
 		{
 			// Создаём полигон, если его ещё нет
@@ -180,13 +190,13 @@ namespace PaintWPF
 			}
 			return true;
 		}
-		public override int UndoAction(Canvas canvas, int cur_action_pos, List<Action> arr_actions)
+		public override int UndoAction(Canvas canvas, int cur_action_pos, List<MyFigureLibrary.Action> arr_actions)
 		{
 			this.RemoveFigure(canvas);
 			cur_action_pos--;
 			return cur_action_pos;
 		}
-		public override int RedoAction(Canvas canvas, int cur_action_pos, List<Action> arr_actions)
+		public override int RedoAction(Canvas canvas, int cur_action_pos, List<MyFigureLibrary.Action> arr_actions)
 		{
 			this.AddFigure(canvas);
 			cur_action_pos++;

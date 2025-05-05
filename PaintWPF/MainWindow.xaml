@@ -29,7 +29,7 @@
             </Grid.RowDefinitions>
             <Button Name="LoadButton" Content="Load painting" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Click="LoadButton_Click"/>
             <Button Name="SaveButton" Content="Save painting" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" Click="SaveButton_Click"/>
-            <Button Name="UploadButton" Content="Upload figures" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" Click="SaveButton_Click"/>
+            <Button Name="UploadButton" Content="Upload figures" HorizontalAlignment="Stretch" Grid.Row="2" VerticalAlignment="Stretch" Click="LoadPluginFigure"/>
         </Grid>
         <Grid Margin="0,4,0,108" Grid.RowSpan="2" Grid.Column="2">
             <Grid.RowDefinitions>

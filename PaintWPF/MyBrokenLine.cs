@@ -8,11 +8,13 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using MyFigureLibrary;
 
 namespace PaintWPF
 {
 	public class MyBrokenLine : MyFigure
 	{
+		public override string Name => "FBrokenLine";
 		private Polyline polyline;
 		public List<MyLine> arr_lines { get; set; }
 		public List<Point> Points { get; set; } = new List<Point>();
@@ -125,13 +127,13 @@ namespace PaintWPF
 			}
 			return true;
 		}
-		public override int UndoAction(Canvas canvas, int cur_action_pos, List<Action> arr_actions)
+		public override int UndoAction(Canvas canvas, int cur_action_pos, List<MyFigureLibrary.Action> arr_actions)
 		{
 			this.RemoveFigure(canvas);
 			cur_action_pos--;
 			return cur_action_pos;
 		}
-		public override int RedoAction(Canvas canvas, int cur_action_pos, List<Action> arr_actions)
+		public override int RedoAction(Canvas canvas, int cur_action_pos, List<MyFigureLibrary.Action> arr_actions)
 		{
 			this.AddFigure(canvas);
 			cur_action_pos++;

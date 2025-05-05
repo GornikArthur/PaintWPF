@@ -1,13 +1,14 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
+using MyFigureLibrary;
 
 namespace PaintWPF
 {
-    public class ActionFill : Action
+    public class ActionFill : MyFigureLibrary.Action
 	{
 		public MyFigure figure;
 		public Color color;
-		private List<Action> arr_actions = new List<Action>();
+		private List<MyFigureLibrary.Action> arr_actions = new List<MyFigureLibrary.Action>();
 		public ActionFill(MyFigure figure, Color color)
 		{
 			this.figure = figure;
@@ -19,7 +20,7 @@ namespace PaintWPF
 			figure.SetFillColor(color);
 		}
 
-		public override int UndoAction(Canvas canvas, int cur_action_pos, List<Action> arr_actions)
+		public override int UndoAction(Canvas canvas, int cur_action_pos, List<MyFigureLibrary.Action> arr_actions)
 		{
 			int i = cur_action_pos - 1;
 			for (; i >= 0; i--)
@@ -36,7 +37,7 @@ namespace PaintWPF
 			cur_action_pos--;
 			return cur_action_pos;
 		}
-		public override int RedoAction(Canvas canvas, int cur_action_pos, List<Action> arr_actions)
+		public override int RedoAction(Canvas canvas, int cur_action_pos, List<MyFigureLibrary.Action> arr_actions)
 		{
 			int i = cur_action_pos;
 			for (; i < arr_actions.Count; i++)

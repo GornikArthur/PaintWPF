@@ -5,11 +5,13 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using MyFigureLibrary;
 
 namespace PaintWPF
 {
 	public class MyLine : MyFigure
 	{
+		public override string Name => "FLine";
 		public double X1 { get; set; }
 		public double Y1 { get; set; }
 		public double X2 { get; set; }
@@ -94,13 +96,13 @@ namespace PaintWPF
 		{
 			arr_figures[arr_figures.Count - 1].Calc(pos);
 		}
-		public override int UndoAction(Canvas canvas, int cur_action_pos, List<Action> arr_actions)
+		public override int UndoAction(Canvas canvas, int cur_action_pos, List<MyFigureLibrary.Action> arr_actions)
 		{
 			RemoveFigure(canvas);
 			cur_action_pos--;
 			return cur_action_pos;
 		}
-		public override int RedoAction(Canvas canvas, int cur_action_pos, List<Action> arr_actions)
+		public override int RedoAction(Canvas canvas, int cur_action_pos, List<MyFigureLibrary.Action> arr_actions)
 		{
 			AddFigure(canvas);
 			cur_action_pos++;

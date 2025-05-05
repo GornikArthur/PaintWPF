@@ -11,11 +11,13 @@ using Microsoft.Win32;
 using System.Xml.Serialization;
 using System.Numerics;
 using System.Windows.Navigation;
+using MyFigureLibrary;
 
 namespace PaintWPF
 {
 	public class MyEllipse : MyFigure
 	{
+		public override string Name => "FEllipse";
 		public double X { get; set; }
 		public double Y { get; set; }
 		public double Width { get; set; }
@@ -113,13 +115,13 @@ namespace PaintWPF
 		{
 			arr_figures[arr_figures.Count - 1].Calc(pos);
 		}
-		public override int UndoAction(Canvas canvas, int cur_action_pos, List<Action> arr_actions)
+		public override int UndoAction(Canvas canvas, int cur_action_pos, List<MyFigureLibrary.Action> arr_actions)
 		{
 			RemoveFigure(canvas);
 			cur_action_pos--;
 			return cur_action_pos;
 		}
-		public override int RedoAction(Canvas canvas, int cur_action_pos, List<Action> arr_actions)
+		public override int RedoAction(Canvas canvas, int cur_action_pos, List<MyFigureLibrary.Action> arr_actions)
 		{
 			AddFigure(canvas);
 			cur_action_pos++;

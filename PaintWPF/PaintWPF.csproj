@@ -24,6 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Reference Include="MyFigureLibrary">
+      <HintPath>..\..\MyFigureLibrary\MyFigureLibrary\bin\Debug\net8.0-windows\MyFigureLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
     <Resource Include="BrokenLine.png" />
     <Resource Include="Ellipse.png" />
     <Resource Include="fill.png" />
