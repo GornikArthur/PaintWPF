@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace PaintWPF
 {
-	public class FigureSaveData
-	{
-		public string TypeName { get; set; }
-		public string JsonData { get; set; }
-	}
+    public class FigureSaveData
+    {
+        public string TypeName { get; set; }
+        public string JsonData { get; set; }
+    }
 
 }

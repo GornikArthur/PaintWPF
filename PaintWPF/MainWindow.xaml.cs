@@ -13,10 +13,12 @@ using System.Windows.Navigation;
 using System.ComponentModel;
 using System.Reflection;
 using MyFigureLibrary;
+using PaintWPF.Figures;
+using System.Runtime.CompilerServices;
 
 namespace PaintWPF
 {
-	public partial class MainWindow : Window
+    public partial class MainWindow : Window
 	{
 		private List<MyFigure> arr_figures = new List<MyFigure>();
 		private List<MyFigureLibrary.Action> arr_actions = new List<MyFigureLibrary.Action>();
@@ -209,23 +211,64 @@ namespace PaintWPF
 			string json = JsonSerializer.Serialize(saveList, options);
 			File.WriteAllText(filePath, json);
 		}
+
 		private void LoadFigures(string filePath)
 		{
+			var currentAssembly = Assembly.GetExecutingAssembly();
+			var figureTypes = currentAssembly
+				.GetTypes()
+				.Where(t => t.IsClass && t.Namespace == "PaintWPF.Figures" && typeof(MyFigure).IsAssignableFrom(t));
+
+			foreach (var t in figureTypes)
+			{
+				// Принудительная инициализация типа
+				RuntimeHelpers.RunClassConstructor(t.TypeHandle);
+			}
+
+
 			if (!File.Exists(filePath)) return;
 
 			string json = File.ReadAllText(filePath);
 			var saveList = JsonSerializer.Deserialize<List<FigureSaveData>>(json);
 
 			arr_figures.Clear();
+
 			if (saveList != null)
 			{
 				foreach (var item in saveList)
 				{
-					var type = Type.GetType(item.TypeName);
+					// Попробуем найти тип по всем загруженным сборкам
+					Type? type = null;
+					foreach (var asm in AppDomain.CurrentDomain.GetAssemblies())
+					{
+						type = Type.GetType(item.TypeName);
+						if (type == null)
+						{
+							string pluginName = item.TypeName.Split('.')[0];
+							string pluginPath = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins", pluginName + ".dll");
+
+							if (File.Exists(pluginPath))
+							{
+								try
+								{
+									var pluginAssembly = Assembly.LoadFrom(pluginPath);
+									type = pluginAssembly.GetType(item.TypeName);
+								}
+								catch (Exception ex)
+								{
+									MessageBox.Show($"Ошибка загрузки плагина {pluginName}: {ex.Message}");
+								}
+							}
+						}
+					}
 					if (type != null && typeof(MyFigure).IsAssignableFrom(type))
 					{
 						var figure = (MyFigure)JsonSerializer.Deserialize(item.JsonData, type)!;
 						arr_figures.Add(figure);
+					}
+					else
+					{
+						MessageBox.Show($"Тип {item.TypeName} не найден в загруженных сборках.");
 					}
 				}
 			}
@@ -240,6 +283,7 @@ namespace PaintWPF
 				figure.AddFigure(Paint_canvas);
 			}
 		}
+
 
 		private void LoadButton_Click(object sender, RoutedEventArgs e)
 		{
