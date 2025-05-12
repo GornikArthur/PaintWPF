@@ -1,13 +1,12 @@
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using Action;
 
-namespace MyFigure
+namespace MyFigureLibrary
 {
-	public abstract class MyFigure : Action.Action
+	public abstract class MyFigure : Action
 	{
-		string Name { get; }
+		public abstract string Name { get; }
 		public abstract void Calc(Point newPoint);
 		public abstract bool IsPointInside(Point point);
 		public abstract void SetFillColor(Color color);
@@ -18,5 +17,4 @@ namespace MyFigure
 		public virtual void CustomMouseMove(Point currentPoint) { }
 
 	}
-
 }

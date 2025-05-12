@@ -7,4 +7,10 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Reference Include="MyFigureLibrary">
+      <HintPath>..\..\MyFigureLibrary\MyFigureLibrary\bin\Debug\net8.0-windows\MyFigureLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>
